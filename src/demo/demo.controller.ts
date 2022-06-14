@@ -15,6 +15,7 @@ import {
   UploadedFile,
   UseInterceptors,
   UploadedFiles,
+  UsePipes,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -22,6 +23,13 @@ import {
   FilesInterceptor,
 } from '@nestjs/platform-express';
 import { DemoService } from './demo.service';
+import { DemoPipe } from 'src/pipe/demo.pipe';
+//
+import * as Joi from 'joi';
+
+const demoSchema = Joi.object({
+  username: Joi.string().alphanum().min(3).max(30).required(),
+});
 
 /**
  * route:
@@ -40,6 +48,14 @@ export class DemoController {
   index() {
     return {
       list: this.demoServices.findAll(),
+    };
+  }
+
+  @Get('test')
+  @UsePipes(new DemoPipe(demoSchema))
+  test(@Query() query) {
+    return {
+      query,
     };
   }
 
