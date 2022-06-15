@@ -16,6 +16,7 @@ import {
   UseInterceptors,
   UploadedFiles,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -27,6 +28,7 @@ import * as Joi from 'joi';
 import { DemoService } from '../../service/demo/demo.service';
 import { DemoPipe } from '../../pipe/demo/demo.pipe';
 import { AppService } from 'src/app.service';
+import { AuthGuard } from 'src/guard/auth.guard';
 
 const demoSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
@@ -42,6 +44,7 @@ const demoSchema = Joi.object({
  * next()
  */
 @Controller('demo')
+@UseGuards(AuthGuard)
 export class DemoController {
   constructor(
     private demoService: DemoService,
