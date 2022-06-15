@@ -22,10 +22,10 @@ import {
   FileInterceptor,
   FilesInterceptor,
 } from '@nestjs/platform-express';
-import { DemoService } from './demo.service';
-import { DemoPipe } from 'src/pipe/demo.pipe';
 //
 import * as Joi from 'joi';
+import { DemoService } from '../../service/demo/demo.service';
+import { DemoPipe } from '../../pipe/demo/demo.pipe';
 
 const demoSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
