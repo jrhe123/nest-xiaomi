@@ -72,7 +72,12 @@ export class DemoController {
 
   @Get('articles')
   async getArticles() {
-    const articles = await this.articleService.findAll();
+    const articles = await this.articleService.findAll(
+      {
+        title: 'roytest',
+      },
+      'title',
+    );
     return articles;
   }
 
