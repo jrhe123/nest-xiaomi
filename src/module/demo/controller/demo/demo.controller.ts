@@ -29,6 +29,7 @@ import { DemoService } from '../../service/demo/demo.service';
 import { DemoPipe } from '../../pipe/demo/demo.pipe';
 import { AppService } from 'src/app.service';
 import { AuthGuard } from 'src/guard/auth.guard';
+import { ArticleService } from '../../service/article/article.service';
 
 const demoSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
@@ -49,6 +50,7 @@ export class DemoController {
   constructor(
     private demoService: DemoService,
     private appSerivce: AppService,
+    private articleService: ArticleService,
   ) {}
 
   @Get()
@@ -66,6 +68,12 @@ export class DemoController {
     return {
       query,
     };
+  }
+
+  @Get('articles')
+  async getArticles() {
+    const articles = await this.articleService.findAll();
+    return articles;
   }
 
   @Post()
