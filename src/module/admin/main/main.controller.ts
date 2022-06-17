@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
-@Controller('main')
-export class MainController {}
+@Controller('admin')
+export class MainController {
+  @Get()
+  index() {
+    return 'admin index page';
+  }
+}
