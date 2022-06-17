@@ -5,7 +5,7 @@ import { Article as IArticle } from 'src/interface/article.interface';
 // mysql
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
-import { Article as ArticleEntity } from 'src/entity/article.entity';
+import { Article as ArticleEntity } from 'src/model/mysql/entity/article.entity';
 
 @Injectable()
 export class ArticleService {
