@@ -3,11 +3,11 @@ import { DemoController } from './controller/demo/demo.controller';
 import { DemoService } from './service/demo/demo.service';
 // config mongoose schemas
 import { MongooseModule } from '@nestjs/mongoose';
-import { ArticleSchema } from 'src/schema/article.schema';
+import { ArticleSchema } from 'src/model/mongo/schema/article.schema';
 import { ArticleService } from './service/article/article.service';
 // typeorm
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Article } from 'src/entity/article.entity';
+import { Article } from 'src/model/mysql/entity/article.entity';
 
 @Module({
   exports: [DemoService], // export for other modules
