@@ -11,9 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // 1. static assets
-  app.useStaticAssets(path.join(__dirname, '..', 'public'), {
-    prefix: '/static/',
-  });
+  app.useStaticAssets(path.join(__dirname, '..', 'public'));
   // 2. html template
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
