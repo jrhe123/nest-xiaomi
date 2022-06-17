@@ -6,6 +6,9 @@ import { DemoService } from './service/demo/demo.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ArticleSchema } from 'src/schema/article.schema';
 import { ArticleService } from './service/article/article.service';
+// typeorm
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Article } from 'src/entity/article.entity';
 
 @Module({
   exports: [DemoService], // export for other modules
@@ -17,6 +20,7 @@ import { ArticleService } from './service/article/article.service';
         collection: 'article',
       },
     ]),
+    TypeOrmModule.forFeature([Article]),
   ],
   controllers: [DemoController],
   providers: [DemoService, AppService, ArticleService],

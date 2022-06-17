@@ -1,28 +1,42 @@
 import { Injectable } from '@nestjs/common';
+// mongoose
 import { InjectModel } from '@nestjs/mongoose';
-import { Article } from 'src/interface/article.interface';
+import { Article as IArticle } from 'src/interface/article.interface';
+// mysql
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Article as ArticleEntity } from 'src/entity/article.entity';
 
 @Injectable()
 export class ArticleService {
-  constructor(@InjectModel('Article') private readonly articleModel) {}
+  constructor(
+    @InjectModel('Article') private readonly articleModel,
+    @InjectRepository(ArticleEntity)
+    private readonly aritcleRepositor: Repository<ArticleEntity>,
+  ) {}
 
   // search
-  async findAll(json: Article = {}, fields?: string) {
+  async findAll(json: IArticle = {}, fields?: string) {
     return await this.articleModel.find(json, fields).exec();
   }
 
   // add
-  async add(json: Article) {
+  async add(json: IArticle) {
     return await this.articleModel.save(json);
   }
 
   // update
-  async update(json1: Article, json2: Article) {
+  async update(json1: IArticle, json2: IArticle) {
     return await this.articleModel.updateOne(json1, json2);
   }
 
   // delete
-  async delete(json: Article) {
+  async delete(json: IArticle) {
     return await this.articleModel.deleteOne(json);
+  }
+
+  // search mysql
+  async findAllMysql() {
+    return await this.aritcleRepositor.find();
   }
 }
