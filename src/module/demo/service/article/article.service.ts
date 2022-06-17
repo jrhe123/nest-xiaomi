@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Article as IArticle } from 'src/interface/article.interface';
 // mysql
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { Article as ArticleEntity } from 'src/entity/article.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class ArticleService {
   constructor(
     @InjectModel('Article') private readonly articleModel,
     @InjectRepository(ArticleEntity)
-    private readonly aritcleRepositor: Repository<ArticleEntity>,
+    private readonly aritcleRepository: Repository<ArticleEntity>,
   ) {}
 
   // search
@@ -36,7 +36,7 @@ export class ArticleService {
   }
 
   // search mysql
-  async findAllMysql() {
-    return await this.aritcleRepositor.find();
+  async findAllMysql(json?: FindManyOptions<ArticleEntity>) {
+    return await this.aritcleRepository.find(json);
   }
 }

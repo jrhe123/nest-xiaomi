@@ -81,6 +81,19 @@ export class DemoController {
     return articles;
   }
 
+  @Get('articles_mysql')
+  async getMysqlArticles() {
+    const articles = await this.articleService.findAllMysql({
+      where: {
+        title: 'roytest',
+      },
+      order: {
+        id: 'DESC',
+      },
+    });
+    return articles;
+  }
+
   @Post()
   create(@Request() req, @Response() res) {
     // 1. cookie usage
