@@ -27,7 +27,6 @@ import {
 import * as Joi from 'joi';
 import { DemoService } from '../../service/demo/demo.service';
 import { DemoPipe } from '../../pipe/demo/demo.pipe';
-import { AppService } from 'src/app.service';
 import { AuthGuard } from 'src/guard/auth.guard';
 import { ArticleService } from '../../service/article/article.service';
 
@@ -49,14 +48,11 @@ const demoSchema = Joi.object({
 export class DemoController {
   constructor(
     private demoService: DemoService,
-    private appSerivce: AppService,
     private articleService: ArticleService,
   ) {}
 
   @Get()
   index() {
-    // common service
-    const appConfig = this.appSerivce.getAppConfig();
     return {
       list: this.demoService.findAll(),
     };

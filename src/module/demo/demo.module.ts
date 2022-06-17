@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppService } from 'src/app.service';
 import { DemoController } from './controller/demo/demo.controller';
 import { DemoService } from './service/demo/demo.service';
 // config mongoose schemas
@@ -23,6 +22,6 @@ import { Article } from 'src/entity/article.entity';
     TypeOrmModule.forFeature([Article]),
   ],
   controllers: [DemoController],
-  providers: [DemoService, AppService, ArticleService],
+  providers: [DemoService, ArticleService],
 })
 export class DemoModule {}
