@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Article as IArticle } from 'src/interface/article.interface';
 // mysql
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Article as ArticleEntity } from 'src/entity/article.entity';
 
 @Injectable()
@@ -38,5 +38,38 @@ export class ArticleService {
   // search mysql
   async findAllMysql(json?: FindManyOptions<ArticleEntity>) {
     return await this.aritcleRepository.find(json);
+  }
+
+  async findByQuery(query: string) {
+    // select * from article
+    return await this.aritcleRepository.query(query);
+  }
+
+  /**
+   *
+   * MYSQL version
+   *
+   */
+  async addMysql(json?: ArticleEntity) {
+    const article = new ArticleEntity();
+    article.title = '123';
+    const rows = await this.aritcleRepository.save(article);
+    return rows;
+  }
+
+  async updateMysql(
+    json1: FindOneOptions<ArticleEntity>,
+    json2: ArticleEntity,
+  ) {
+    const article = await this.aritcleRepository.findOne(json1);
+    article.title = json2.title;
+    const rows = await this.aritcleRepository.save(article);
+    return rows;
+  }
+
+  async deleteMysql(json: FindOneOptions<ArticleEntity>) {
+    const article = await this.aritcleRepository.findOne(json);
+    const rows = await this.aritcleRepository.remove(article);
+    return rows;
   }
 }
