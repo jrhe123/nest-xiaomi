@@ -10,16 +10,17 @@ import { ApiModule } from './module/api/api.module';
 import { DefaultModule } from './module/default/default.module';
 // config mongoose connection
 import { MongooseModule } from '@nestjs/mongoose';
+// dot.env
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     AdminModule,
     DemoModule,
     ApiModule,
     DefaultModule,
-    MongooseModule.forRoot('mongodb://admin:abc123456@localhost:27017', {
-      dbName: 'nest',
-    }),
+    MongooseModule.forRoot(process.env.MONGO_DB_URL),
   ],
   controllers: [AppController],
   providers: [AppService],
