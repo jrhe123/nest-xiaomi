@@ -14,4 +14,26 @@ export class ToolsService {
     });
     return captcha;
   }
+
+  // import { Connection } from "typeorm";
+  // constructor(
+  //   @InjectRepository(Book)
+  //       private bookRepository: Repository<Book>,
+  //       private connection: Connection
+  //   ){}
+  //   async createMultipleBooks(books: Book[]) {
+  //     const queryRunner = this.connection.createQueryRunner();
+  //          await queryRunner.connect();
+  //          await queryRunner.startTransaction();
+  //          try {
+  //              await queryRunner.manager.save(books[0]);
+  //              await queryRunner.manager.save(books[1]);
+
+  //              await queryRunner.commitTransaction();
+  //          }catch (err) {
+  //              await queryRunner.rollbackTransaction();
+  //          }finally {
+  //              await queryRunner.release();
+  //          }
+  //  }
 }
