@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 // middleware
 import { InitMiddleware } from './middleware/init.middleware';
+import { AdminAuthMiddleware } from './middleware/admin-auth.middleware';
 // sub-modules
 import { DemoModule } from './module/demo/demo.module';
 import { AdminModule } from './module/admin/admin.module';
@@ -39,5 +40,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     // apply middlware to all routes
     consumer.apply(InitMiddleware).forRoutes('*');
+    consumer.apply(AdminAuthMiddleware).forRoutes('admin/*');
   }
 }
